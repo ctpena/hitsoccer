@@ -32,5 +32,4 @@ HitSoccer/
 
 ## ライセンス
 
-(c) 2023 HITDesign Group All Rights Reserved.
-
+© 2023 HITDesignGroup.
