@@ -9,8 +9,8 @@ void motorSetup() {
 }
 
 void motorLoop() {
-    motorA.setSpeed(0);
-    motorB.setSpeed(0);
+    motorA.setSpeed(28);
+    motorB.setSpeed(28);
     motorA.setDirection(false);
     motorB.setDirection(false);
 }
