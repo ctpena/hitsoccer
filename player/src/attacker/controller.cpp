@@ -59,6 +59,16 @@ void controllerSetup() {
     }
 }
 
+int joystickValueConversion(int joystickValue) {
+    if (joystickValue == 127) {
+        return 0;
+    } else if (joystickValue < 127) {
+        return static_cast<int>(map(joystickValue, 0, 126, 100, 0));
+    } else {
+        return static_cast<int>(map(joystickValue, 128, 255, 0, -100));
+    }
+}
+
 void controllerLoop() {
     unsigned long currentMillis = millis();
 
@@ -75,6 +85,8 @@ void controllerLoop() {
              * ps2x.NewButtonState - will be TRUE if button was JUST pressed OR released
              * ps2x.ButtonReleased - will be TRUE if button was JUST released
             */
+            int motorVal = joystickValueConversion(ps2x.Analog(PSS_LY));
+            Serial.println(motorVal);
         }
     }
 }
