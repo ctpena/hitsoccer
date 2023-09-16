@@ -12,8 +12,31 @@
 #define pressures   false
 #define rumble      false
 
-void controllerSetup();
+class Controller {
+private:
+    PS2X ps2x{};
+    int error = 0;
+    byte type = 0;
+    byte vibrate = 0;
 
-void controllerLoop();
+    unsigned long previousControllerMillis = 0;
+    const long controllerInterval = 50;
+
+    static int joystickValueConversion(int joystickValue);
+
+    // button
+    int pss_RY = 0;
+    int pss_LY = 0;
+public:
+    Controller();
+
+    void setup();
+
+    void loop();
+
+    int getPSS_LX() const { return pss_LY; }
+
+    int getPSS_RY() const { return pss_RY; }
+};
 
 #endif //PLAYER_CONTROLLER_H

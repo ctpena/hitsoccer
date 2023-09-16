@@ -40,6 +40,9 @@ public:
     }
 };
 
+extern Motor motorA;
+extern Motor motorB;
+
 void motorSetup();
 
 void motorLoop();

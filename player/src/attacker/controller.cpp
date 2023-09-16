@@ -1,15 +1,8 @@
 #include "controller.h"
 
-PS2X ps2x;
+Controller::Controller() = default;
 
-int error = 0;
-byte type = 0;
-byte vibrate = 0;
-
-unsigned long previousControllerMillis = 0;
-const long controllerInterval = 50;
-
-void controllerSetup() {
+void Controller::setup() {
     Serial.begin(57600);
     delay(300);
     error = ps2x.config_gamepad(PS2_CLK, PS2_CMD, PS2_SEL, PS2_DAT, pressures, rumble);
@@ -59,7 +52,7 @@ void controllerSetup() {
     }
 }
 
-int joystickValueConversion(int joystickValue) {
+int Controller::joystickValueConversion(int joystickValue) {
     if (joystickValue == 127) {
         return 0;
     } else if (joystickValue < 127) {
@@ -69,7 +62,7 @@ int joystickValueConversion(int joystickValue) {
     }
 }
 
-void controllerLoop() {
+void Controller::loop() {
     unsigned long currentMillis = millis();
 
     if (currentMillis - previousControllerMillis >= controllerInterval) {
@@ -85,8 +78,10 @@ void controllerLoop() {
              * ps2x.NewButtonState - will be TRUE if button was JUST pressed OR released
              * ps2x.ButtonReleased - will be TRUE if button was JUST released
             */
-            int motorVal = joystickValueConversion(ps2x.Analog(PSS_LY));
-            Serial.println(motorVal);
+            //
+            pss_RY = joystickValueConversion(ps2x.Analog(PSS_RY));
+            pss_LY = joystickValueConversion(ps2x.Analog(PSS_LY));
+            Serial.println(pss_RY);
         }
     }
 }
