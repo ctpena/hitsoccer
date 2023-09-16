@@ -9,16 +9,20 @@ hitsoccer/
 ├── README.md
 ├── control
 └── player
-    ├── platformio.ini
     ├── .gitignore
     ├── include
     │   └── README
     ├── lib
     │   ├── PS2X_lib
     │   └── README
+    ├── platformio.ini
     ├── src
     │   ├── attacker
-    │   │   └── attacker_main.cpp
+    │   │   ├── attacker_main.cpp
+    │   │   ├── controller.cpp
+    │   │   ├── controller.h
+    │   │   ├── motor.cpp
+    │   │   └── motor.h
     │   ├── defender
     │   │   └── defender_main.cpp
     │   └── main.cpp
