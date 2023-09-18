@@ -34,7 +34,7 @@ public:
 
     void loop();
 
-    int getPSS_LX() const { return pss_LY; }
+    int getPSS_LY() const { return pss_LY; }
 
     int getPSS_RY() const { return pss_RY; }
 };

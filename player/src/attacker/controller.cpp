@@ -2,6 +2,7 @@
 
 Controller::Controller() = default;
 
+// Todo Eliminate noise
 void Controller::setup() {
     Serial.begin(57600);
     delay(300);
@@ -81,7 +82,6 @@ void Controller::loop() {
             //
             pss_RY = joystickValueConversion(ps2x.Analog(PSS_RY));
             pss_LY = joystickValueConversion(ps2x.Analog(PSS_LY));
-            Serial.println(pss_RY);
         }
     }
 }

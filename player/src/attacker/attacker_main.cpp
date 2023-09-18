@@ -9,11 +9,33 @@ void setup() {
     motorSetup();
 }
 
+// TODO Simplify the process
+int remapValue(int value) {
+    int absoluteValue = abs(value);
+
+    return static_cast<int>(map(absoluteValue, 0, 100, 40, 100));
+}
+
 // main loop
 void loop() {
     myController.loop();
-    //motorA.setSpeed(30);
-    //motorA.setDirection(true);
-    //motorB.setSpeed(30);
-    //motorB.setDirection(true);
+    //
+    if (myController.getPSS_RY() < 0) {
+        motorA.setDirection(false);
+    } else if (myController.getPSS_RY() == 0) {
+        motorA.stop();
+    } else {
+        motorA.setDirection(true);
+    }
+
+    if (myController.getPSS_LY() < 0) {
+        motorB.setDirection(false);
+    } else if (myController.getPSS_LY() == 0) {
+        motorB.stop();
+    } else {
+        motorB.setDirection(true);
+    }
+
+    motorA.setSpeed(remapValue(myController.getPSS_RY()));
+    motorB.setSpeed(remapValue(myController.getPSS_LY()));
 }
