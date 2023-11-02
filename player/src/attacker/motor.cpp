@@ -1,7 +1,7 @@
 #include "motor.h"
 
-Motor motorA(9, 8, 7);
-Motor motorB(3, 5, 4);
+Motor motorA(5, 4, 7);
+Motor motorB(6, 2, 3);
 
 void motorSetup() {
     motorA.setup();
@@ -10,10 +10,4 @@ void motorSetup() {
 
 // original loop
 void motorLoop() {
-    /*
-    motorA.setSpeed(0);
-    motorB.setSpeed(0);
-    motorA.setDirection(false);
-    motorB.setDirection(false);
-     */
 }

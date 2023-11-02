@@ -13,7 +13,7 @@ void setup() {
 int remapValue(int value) {
     int absoluteValue = abs(value);
 
-    return static_cast<int>(map(absoluteValue, 0, 100, 40, 100));
+    return static_cast<int>(map(absoluteValue, 0, 100, 25, 120));
 }
 
 // main loop
