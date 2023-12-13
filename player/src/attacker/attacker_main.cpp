@@ -13,7 +13,7 @@ void setup() {
 int remapValue(int value) {
     int absoluteValue = abs(value);
     // max 120
-    return static_cast<int>(map(absoluteValue, 0, 100, 50, 120));
+    return static_cast<int>(map(absoluteValue, 0, 100, 50, 255));
 }
 
 // main loop
@@ -35,7 +35,6 @@ void loop() {
     } else {
         motorB.setDirection(true);
     }
-
-    motorA.setSpeed(remapValue(myController.getPSS_RY()));
-    motorB.setSpeed(remapValue(myController.getPSS_LY()));
+    motorA.setSpeed(remapValue(myController.getPSS_LY()));
+    motorB.setSpeed(remapValue(myController.getPSS_RY()));
 }

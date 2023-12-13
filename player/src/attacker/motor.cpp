@@ -1,7 +1,7 @@
 #include "motor.h"
 
-Motor motorA(5, 4, 7);
-Motor motorB(6, 2, 3);
+Motor motorA(5, 7, 4);
+Motor motorB(6, 3, 2);
 
 void motorSetup() {
     motorA.setup();

@@ -22,7 +22,7 @@ private:
     unsigned long previousControllerMillis = 0;
     const long controllerInterval = 50;
 
-    static int joystickValueConversion(int joystickValue);
+    static int joystickValueConversion(int joystickValue, int buffer[], int &index);
 
     // button
     int pss_RY = 0;
