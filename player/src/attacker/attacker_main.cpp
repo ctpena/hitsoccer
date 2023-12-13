@@ -1,12 +1,17 @@
 #include "controller.h"
 #include "motor.h"
+#include "mservo.h"
 
 Controller myController;
+ServoMotor servo1(9);
+ServoMotor servo2(8);
 
 // main setup
 void setup() {
     myController.setup();
     motorSetup();
+    servo1.attach();
+    servo2.attach();
 }
 
 // TODO Simplify the process
@@ -37,4 +42,7 @@ void loop() {
     }
     motorA.setSpeed(remapValue(myController.getPSS_LY()));
     motorB.setSpeed(remapValue(myController.getPSS_RY()));
+    //
+    servo2.rotate(90);
+    servo1.rotate(0);
 }
