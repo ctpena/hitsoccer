@@ -53,13 +53,30 @@ void Controller::setup() {
     }
 }
 
-int Controller::joystickValueConversion(int joystickValue) {
-    if (joystickValue == 127) {
+static const int SAMPLE_SIZE = 10;
+int ryBuffer[SAMPLE_SIZE] = {0};
+int lyBuffer[SAMPLE_SIZE] = {0};
+int ryIndex = 0;
+int lyIndex = 0;
+
+int getAverage(int buffer[], int &index, int newValue) {
+    buffer[index] = newValue;
+    index = (index + 1) % SAMPLE_SIZE;
+    int sum = 0;
+    for (int i = 0; i < SAMPLE_SIZE; i++) {
+        sum += buffer[i];
+    }
+    return sum / SAMPLE_SIZE;
+}
+
+int Controller::joystickValueConversion(int joystickValue, int buffer[], int &index) {
+    int averageValue = getAverage(buffer, index, joystickValue);
+    if (averageValue == 127) {
         return 0;
-    } else if (joystickValue < 127) {
-        return static_cast<int>(map(joystickValue, 0, 126, 100, 0));
+    } else if (averageValue < 127) {
+        return static_cast<int>(map(averageValue, 0, 126, 100, 0));
     } else {
-        return static_cast<int>(map(joystickValue, 128, 255, 0, -100));
+        return static_cast<int>(map(averageValue, 128, 255, 0, -100));
     }
 }
 
@@ -80,8 +97,8 @@ void Controller::loop() {
              * ps2x.ButtonReleased - will be TRUE if button was JUST released
             */
             //
-            pss_RY = joystickValueConversion(ps2x.Analog(PSS_RY));
-            pss_LY = joystickValueConversion(ps2x.Analog(PSS_LY));
+            pss_RY = joystickValueConversion(ps2x.Analog(PSS_RY), ryBuffer, ryIndex);
+            pss_LY = joystickValueConversion(ps2x.Analog(PSS_LY), lyBuffer, lyIndex);
         }
     }
 }
