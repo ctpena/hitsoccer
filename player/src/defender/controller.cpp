@@ -63,15 +63,21 @@ void Controller::loop() {
 
 void Controller::readGuitarHeroController() {
     ps2x.read_gamepad();
+    noise = (
+            (ps2x.Analog(PSS_RY) == 255 || ps2x.Analog(PSS_RY) == 0) &&
+            (ps2x.Analog(PSS_RX) == 255 || ps2x.Analog(PSS_RX) == 0) &&
+            (ps2x.Analog(PSS_LY) == 255 || ps2x.Analog(PSS_LY) == 0) &&
+            (ps2x.Analog(PSS_LX) == 255 || ps2x.Analog(PSS_LX) == 0)
+    );
 }
 
 void Controller::readDualShockController() {
     ps2x.read_gamepad(false, vibrate);
     noise = (
-            ps2x.Analog(PSS_RY) == 255 &&
-            ps2x.Analog(PSS_RX) == 255 &&
-            ps2x.Analog(PSS_LY) == 255 &&
-            ps2x.Analog(PSS_LX) == 255
+            (ps2x.Analog(PSS_RY) == 255 || ps2x.Analog(PSS_RY) == 0) &&
+            (ps2x.Analog(PSS_RX) == 255 || ps2x.Analog(PSS_RX) == 0) &&
+            (ps2x.Analog(PSS_LY) == 255 || ps2x.Analog(PSS_LY) == 0) &&
+            (ps2x.Analog(PSS_LX) == 255 || ps2x.Analog(PSS_LX) == 0)
     );
 }
 
