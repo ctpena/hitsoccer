@@ -10,8 +10,18 @@ void Motor::setup() const {
 }
 
 void Motor::setSpeed(int speed) const {
-    digitalWrite(dirPin, LOW);
-    analogWrite(pwmPin, 0);
+    if (speed > 0) {
+        digitalWrite(dirPin, LOW);
+        int pwmValue = static_cast<int>(map(speed, 0, 100, 100, 255));
+        analogWrite(pwmPin, pwmValue);
+    } else if (speed < 0) {
+        digitalWrite(dirPin, HIGH);
+        int pwmValue = static_cast<int>(map(abs(speed), 0, 100, 155, 0));
+        analogWrite(pwmPin, pwmValue);
+    } else {
+        digitalWrite(dirPin, LOW);
+        digitalWrite(pwmPin, LOW);
+    }
 }
 
 void Motor::brake() const {

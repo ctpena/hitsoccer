@@ -11,16 +11,22 @@ public:
 
     void loop();
 
+    bool isButtonPressed(int button);
+
+    bool isButton(int button);
+
+    int isAnalogValue(int analogButton);
+
 private:
-    PS2X ps2x;
+    PS2X ps2x{};
     int error;
     byte type;
     byte vibrate;
 
-    static const int PS2_DAT = 13;
-    static const int PS2_CMD = 12;
-    static const int PS2_SEL = 11;
-    static const int PS2_CLK = 10;
+    static const int PS2_DAT = 2;
+    static const int PS2_CMD = 3;
+    static const int PS2_SEL = 4;
+    static const int PS2_CLK = 5;
 
     static const bool pressures = false;
     static const bool rumble = false;
@@ -28,6 +34,8 @@ private:
     void readGuitarHeroController();
 
     void readDualShockController();
+
+    bool noise{};
 };
 
 
