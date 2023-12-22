@@ -15,13 +15,28 @@ void setup() {
     controller.setup();
 }
 
+int convertValue(int originalValue) {
+    if (originalValue <= 127) {
+        return map(originalValue, 0, 127, 100, 0);
+    } else {
+        return map(originalValue, 128, 255, -1, -100);
+    }
+}
+
+int leftStickY;
+int rightStickY;
+
 void loop() {
     controller.loop();
-    int leftStickY = controller.isAnalogValue(PSS_LY);
-    int rightStickY = controller.isAnalogValue(PSS_RY);
-    Serial.print(leftStickY);
-    Serial.print(" , ");
-    Serial.println(rightStickY);
-    motor1.setSpeed(10);
-    motor2.setSpeed(10);
+    if (controller.isButton(PSB_L1) || controller.isButton(PSB_R1)) {
+        leftStickY = convertValue(controller.isAnalogValue(PSS_LY));
+        rightStickY = convertValue(controller.isAnalogValue(PSS_RY));
+        Serial.print(leftStickY);
+        Serial.print(" , ");
+        Serial.println(rightStickY);
+    }
+
+    motor1.setSpeed(leftStickY);
+    motor2.setSpeed(rightStickY);
+
 }
