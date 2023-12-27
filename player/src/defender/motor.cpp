@@ -12,11 +12,11 @@ void Motor::setup() const {
 void Motor::setSpeed(int speed) const {
     if (speed > 0) {
         digitalWrite(dirPin, LOW);
-        int pwmValue = static_cast<int>(map(speed, 0, 100, 100, 200));
+        int pwmValue = static_cast<int>(map(speed, 0, 100, 100, 255));
         analogWrite(pwmPin, pwmValue);
     } else if (speed < 0) {
         digitalWrite(dirPin, HIGH);
-        int pwmValue = static_cast<int>(map(abs(speed), 0, 100, 155, 55));
+        int pwmValue = static_cast<int>(map(abs(speed), 0, 100, 155, 0));
         analogWrite(pwmPin, pwmValue);
     } else {
         digitalWrite(dirPin, LOW);
