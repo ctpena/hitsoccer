@@ -31,12 +31,10 @@ void loop() {
     if (controller.isButton(PSB_L1) || controller.isButton(PSB_R1)) {
         leftStickY = convertValue(controller.isAnalogValue(PSS_LY));
         rightStickY = convertValue(controller.isAnalogValue(PSS_RY));
-        Serial.print(leftStickY);
-        Serial.print(" , ");
-        Serial.println(rightStickY);
+        //Serial.print(leftStickY);
+        //Serial.print(" , ");
+        //Serial.println(rightStickY);
     }
-
     motor1.setSpeed(leftStickY);
     motor2.setSpeed(rightStickY);
-
 }
